@@ -1,11 +1,7 @@
-# Brazillian E-Commerce Dataset
+# Brazilian E-Commerce Dataset
 (Downloaded from [Kaggle](https://www.kaggle.com/olistbr/brazilian-ecommerce))
 
-
-
 [TOC]
-
-
 
 ## About the data
 
@@ -23,61 +19,9 @@
 
 ## Schema
 
+The full dataset is divided in 8 files: orders, *payments, reviews, items, products, sellers, customers, geolocation*. Descriptions of the columns can be found on the the Kaggle link above, or on the main script.
+
 <img src="figures/ds-schema.png">
-
-
-
-## Description of columns
-
-|   Dataset   | Column                        | Description                                                  |
-| :---------: | ----------------------------- | ------------------------------------------------------------ |
-|  *Orders*   | order_id                      | unique identifier of the order.                              |
-|  *Orders*   | customer_id                   | key to the customer dataset. Each order has a unique customer_id. |
-|  *Orders*   | order_status                  | Reference to the order status (delivered, shipped, etc).     |
-|  *Orders*   | order_purchase_timestamp      | Shows the purchase timestamp.                                |
-|  *Orders*   | order_approved_at             | Shows the payment approval timestamp.                        |
-|  *Orders*   | order_delivered_carrier_date  | Shows the order posting timestamp. When it was handled to the logistic partner. |
-|  *Orders*   | order_delivered_customer_date | Shows the actual order delivery date to the customer.        |
-|  *Orders*   | order_estimated_delivery_date | Shows the estimated delivery date that was informed to customer at the purchase moment. |
-|     ---     | ---                           | ---                                                          |
-| *Payments*  | payment_sequential            | a customer may pay with more than one payment method. If so, a sequence will be created to accommodate all payments. |
-| *Payments*  | payment_type                  | method of payment chosen by the customer.                    |
-| *Payments*  | payment_installments          | number of installments chosen by the customer.               |
-| *Payments*  | payment_value                 | transaction value.                                           |
-|     ---     | ---                           | ---                                                          |
-|  *Reviews*  | review_id                     | unique review identifier                                     |
-|  *Reviews*  | review_score                  | Note ranging from 1 to 5 given by the customer on a satisfaction survey. |
-|  *Reviews*  | review_comment_title          | Comment title from the review left by the customer, in Portuguese. |
-|  *Reviews*  | review_comment_message        | Comment message from the review left by the customer, in Portuguese. |
-|  *Reviews*  | review_creation_date          | Shows the date in which the satisfaction survey was sent to the customer. |
-|  *Reviews*  | review_answer_timestamp       | Shows satisfaction survey answer timestamp.                  |
-|     ---     | ---                           | ---                                                          |
-|   *Items*   | order_item_id                 | sequential number identifying number of items included in the same order. |
-|   *Items*   | product_id                    | product unique identifier                                    |
-|   *Items*   | seller_id                     | seller unique identifier                                     |
-|   *Items*   | shipping_limit_date           | Shows the seller shipping limit date for handling the order over to the logistic partner. |
-|   *Items*   | price                         | item price                                                   |
-|   *Items*   | freight_value                 | item freight value item (if an order has more than one item the freight value is splitted between items) |
-|     ---     | ---                           | ---                                                          |
-| *Products*  | product_category_name         | root category of product, in Portuguese.                     |
-| *Products*  | product_name_lenght           | number of characters extracted from the product name.        |
-| *Products*  | product_description_lenght    | number of characters extracted from the product description. |
-| *Products*  | product_photos_qty            | number of product published photos                           |
-| *Products*  | product_weight_g              | product weight measured in grams.                            |
-| *Products*  | product_length_cm             | product length measured in centimeters.                      |
-| *Products*  | product_height_cm             | product height measured in centimeters.                      |
-| *Products*  | product_width_cm              | product width measured in centimeters.                       |
-|     ---     | ---                           | ---                                                          |
-| *Customers* | customer_id                   | key to the orders dataset. Each order has a unique customer_id. |
-| *Customers* | customer_unique_id            | unique identifier of a customer.                             |
-| *Customers* | customer_zip_code_prefix      | first five digits of customer zip code                       |
-| *Customers* | customer_city                 | customer city name                                           |
-| *Customers* | customer_state                | customer state                                               |
-|     ---     | ---                           | ---                                                          |
-|  *Sellers*  | seller_id                     | seller unique identifier                                     |
-|  *Sellers*  | seller_zip_code_prefix        | first 5 digits of seller zip code                            |
-|  *Sellers*  | seller_city                   | seller city name                                             |
-|  *Sellers*  | seller_state                  | seller state                                                 |
 
 
 
@@ -114,4 +58,25 @@ To calculate what kind of products generate the most revenue in total, we repeat
 
 # Do orders vary throughout the year?
 
-Sales are a very dynamic process are usually have have some variation throughout the year.
+Sales are a very dynamic process and usually have have some variation throughout the year.  Does Olist sell more during a specific time of the year? We calculated the number of orders per day in the 2-year period included in the dataset.
+
+<img src="figures\orders_timeseries.png" alt="orders_timeseries" style="zoom: 33%;" />
+
+We observe that orders have increased gradually over time and that there's a spike in orders which coincides with **Black Friday** but more on that later. 
+
+## Seasonal Decomposition
+
+In order to separate the series in temporal components we performed a **seasonal decomposition analysis**. 
+
+
+
+We can also see that the residual plot shows zero. This is a good example where the naïve, or classical, decomposition was not able to separate the noise that we added from the linear trend 
+
+[[1\]]: 
+
+
+
+[1]: https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/	"How to decompose a time series"
+
+
+
