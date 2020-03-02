@@ -148,7 +148,7 @@ We repeated the same analysis used for customer on all the sellers available in 
 
 I also visualized this distribution by plotting the average order value by seller on a state-delimited map of Brazil.
 
-![seller_map](C:\Users\Zaca\Documents\GitHub\projects\brazilian-ecommerce\figures\seller_map.png)
+<img src="figures/seller_map.png" width="900"/>
 
 # Conclusions
 
