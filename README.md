@@ -1,24 +1,50 @@
 ﻿# Brazilian E-Commerce Statistical Analysis
-by Ricardo Zacarias
+*Ricardo Zacarias*
 
-[TOC]
 
-## About the data
-(Downloaded from [Kaggle](https://www.kaggle.com/olistbr/brazilian-ecommerce))
 
-> The dataset has information of 100k orders from 2016 to 2018 made at multiple marketplaces in Brazil. Its features allows viewing an order from multiple dimensions: from order status, price, payment and freight performance to customer location, product attributes and finally reviews written by customers. We also released a geolocation dataset that relates Brazilian zip codes to lat/lng coordinates.
+# Contents
 
-## About Olist.com
+[Project Abstract](#Project Abstract)
 
-> This dataset was generously provided by Olist, the largest department store in Brazilian marketplaces. Olist connects small businesses from all over Brazil to channels without hassle and with a single contract. Those merchants are able to sell their products through the Olist Store and ship them directly to the customers using Olist logistics partners.
+[Dataset](#Dataset)
 
-## Attention
+[Questions](#Questions)
+
+[Product Profiles](#Product Profiles)
+
+[Do orders vary throughout the year?](#Do orders vary throughout the year?)
+
+[Black Friday](#Black Friday)
+
+[Customer Profiles](#Customer Profiles)
+
+[Seller Profiles](#Seller Profiles)
+
+[Conclusions](#Conclusions)
+
+[References](#References)
+
+
+
+# Project Abstract
+
+This project features the commercial profile of products, customers and sellers that participate in the largest department store in Brazilian marketplaces. Calculated the frequency and price range of products that generate the most revenue. Used a seasonal decomposition model to extract seasonality and overall trends in the number of orders over time. Detected a peak in sales that coincide with *Black Friday* and found that the products most sold on promotional days are similar to those who already sell well. We also used latitude/longitude coordinates to geolocate the customers that spend the most and the highest volume sellers. 
+
+TODO: Recency-Frequency-Monetary Value analysis which helps to identify the most valuable customers.
+
+
+
+# Dataset
+This is a well known dataset available from [Kaggle](https://www.kaggle.com/olistbr/brazilian-ecommerce). The dataset has information of 100k orders from 2016 to 2018 made at multiple marketplaces in Brazil. Its features allows viewing an order from multiple dimensions: from order status, price, payment and freight performance to customer location, product attributes and finally reviews written by customers. The dataset was generously provided [Olist](https://olist.com/), the largest department store in Brazilian marketplaces. Olist connects small businesses from all over Brazil to channels without hassle and with a single contract. Those merchants are able to sell their products through the Olist Store and ship them directly to the customers using Olist logistics partners.
+
+### Important notes about the data
 
 - An order might have multiple items.
 - Each item might be fulfilled by a distinct seller.
 - All text identifying stores and partners where replaced by the names of Game of Thrones great houses.
 
-## Schema
+### Schema
 
 The full dataset is divided in 8 files: orders, *payments, reviews, items, products, sellers, customers, geolocation*. Descriptions of the columns can be found on the the Kaggle link above, or on the main script.
 
@@ -26,7 +52,7 @@ The full dataset is divided in 8 files: orders, *payments, reviews, items, produ
 
 
 
-## Questions
+# Questions
 
 - Which product sells the most? Do they profit more from cheap or from expensive products?
 - Do orders vary throughout the year?
@@ -35,7 +61,7 @@ The full dataset is divided in 8 files: orders, *payments, reviews, items, produ
 
 
 
-# Product profiles
+# Product Profiles
 
 The products dataset shows that **32951** products were sold in 100k orders. Are there products that sell more than others? Or were they all sold approximately 3 times?
 
@@ -80,6 +106,8 @@ In order to separate the series in temporal components we performed a **seasonal
 
 We observe that **seasonal decomposition identified a significant upward trend** in the overall number of orders.  The seasonal component reveals the Black Friday spike but its averaging generates an artifact in the previous year where there was no spike. There's an additional seasonal bump in the months of Jan-Feb. We can also see that the residual plot shows zero. This is an indication that the decomposition model was not able to separate the noise. Caution and healthy skepticism are needed when using automated decomposition methods. 
 
+
+
 # Black Friday
 
 [][1]
@@ -100,6 +128,8 @@ We can see that **most products in the top 50 see their probability of selling i
 
 With this sample, **we could not reject the hypothesis that the means between these groups are equal** (p = 0.16).
 
+
+
 # Customer profiles
 
 We calculated the average money spent per order and a 95% confidence interval for customers in each region in Brazil to estimate the population mean in every state.
@@ -115,6 +145,8 @@ We also visualized this distribution by plotting the average money spent per cus
 We repeated the same analysis used for customer on all the sellers available in the dataset.
 
 <img src="figures/sellers_ci.png" width="900"/>
+
+I also visualized this distribution by plotting the average order value by seller on a state-delimited map of Brazil.
 
 ![seller_map](C:\Users\Zaca\Documents\GitHub\projects\brazilian-ecommerce\figures\seller_map.png)
 
