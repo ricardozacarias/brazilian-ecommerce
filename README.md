@@ -5,21 +5,21 @@
 
 # Contents
 
-[Project Abstract](#Project Abstract)
+[Project Abstract](#Project-Abstract)
 
 [Dataset](#Dataset)
 
 [Questions](#Questions)
 
-[Product Profiles](#Product Profiles)
+[Product Profiles](#Product-Profiles)
 
-[Do orders vary throughout the year?](#Do orders vary throughout the year?)
+[Do orders vary throughout the year?](#Do-orders-vary-throughout-the-year?)
 
-[Black Friday](#Black Friday)
+[Black Friday](#Black-Friday)
 
-[Customer Profiles](#Customer Profiles)
+[Customer Profiles](#Customer-Profiles)
 
-[Seller Profiles](#Seller Profiles)
+[Seller Profiles](#Seller-Profiles)
 
 [Conclusions](#Conclusions)
 
